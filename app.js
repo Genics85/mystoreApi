@@ -1,6 +1,7 @@
 const express=require("express");
 const mongoose=require("mongoose");
 const userRouter=require("./routes/users.js");
+const peopleRouter=require("./routes/people.js")
 const app=express();
 
 const port= process.env.PORT || 5000;
@@ -15,7 +16,13 @@ mongoose.connect("mongodb://localhost:27017/foseonline")
 //MiddleWares
 app.use(express.json());
 app.use("/user",userRouter);
+app.use("/people",peopleRouter)
 
+exports.emptyRoute=(req,res)=>{
+    res.status(400).send("add path to your url");
+}
+
+app.all("/",this.emptyRoute)
 
 app.listen(port,"0.0.0.0",()=>{
     console.log(`listening on port ${port}`)
