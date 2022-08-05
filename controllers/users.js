@@ -4,13 +4,16 @@ const bcrypt=require("bcryptjs");
 const userSignIn = async (req,res) =>{ 
     try {
         const {email,password} =req.body;
+        if(email||password){
+            res.status(400).json({msg:"Password or email is undefined"});
+        }
         const user= await Users.findOne({email});
         if(!user){
             return res.status(400).json({msg:"Incorrect Email"});
         }
         const isMatch=await bcrypt.compare(password,user.password);
         if(!isMatch){
-            return res.status(400).json({msg:"Wrong password"});
+            return res.status(400).json({msg:"Incorrect password"}); 
         }
         const token=jwt.sign({id:user._id},"userPasswordToken");
         res.json({token,...user._doc});

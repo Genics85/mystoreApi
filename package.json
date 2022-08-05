@@ -7,10 +7,10 @@
   "description": "backend of the foseonline ecommerce app",
   "main": "app.js",
   "scripts": {
-    "test": "jest --watchAll --detectOpenHandles",
+    "test": "jest --watchAll --detectOpenHandles --runInBand NODE_ENV=test --coverage",
     "start": "node app.js"
   },
-  "author": "Genics85",
+  "author": "Genics85", 
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
